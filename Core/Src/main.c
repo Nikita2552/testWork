@@ -122,6 +122,8 @@ void vTaskForUART( void *pvParameters )
 void vTaskForI2C( void *pvParameters )
 {
 
+  int I2CNumbers[4];
+
   for( ;; )
  {
 
@@ -133,7 +135,7 @@ void vTaskForI2C( void *pvParameters )
 void vTaskForDisplay( void *pvParameters )
 {
 
-	int displayNumbers[4];
+  int displayNumbers[4];
 
   for( ;; )
  {
