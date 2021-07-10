@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000030  00000000  00000000  00020010  2**0
                   CONTENTS, READONLY
- 12 .debug_info   00024ded  00000000  00000000  00020040  2**0
+ 12 .debug_info   00024dfb  00000000  00000000  00020040  2**0
                   CONTENTS, READONLY, DEBUGGING
- 13 .debug_abbrev 00004433  00000000  00000000  00044e2d  2**0
+ 13 .debug_abbrev 00004433  00000000  00000000  00044e3b  2**0
                   CONTENTS, READONLY, DEBUGGING
- 14 .debug_aranges 00001db8  00000000  00000000  00049260  2**3
+ 14 .debug_aranges 00001db8  00000000  00000000  00049270  2**3
                   CONTENTS, READONLY, DEBUGGING
- 15 .debug_ranges 00001c08  00000000  00000000  0004b018  2**3
+ 15 .debug_ranges 00001c08  00000000  00000000  0004b028  2**3
                   CONTENTS, READONLY, DEBUGGING
- 16 .debug_macro  00004d74  00000000  00000000  0004cc20  2**0
+ 16 .debug_macro  00004d74  00000000  00000000  0004cc30  2**0
                   CONTENTS, READONLY, DEBUGGING
- 17 .debug_line   0001825a  00000000  00000000  00051994  2**0
+ 17 .debug_line   0001825a  00000000  00000000  000519a4  2**0
                   CONTENTS, READONLY, DEBUGGING
- 18 .debug_str    000ddee3  00000000  00000000  00069bee  2**0
+ 18 .debug_str    000ddef2  00000000  00000000  00069bfe  2**0
                   CONTENTS, READONLY, DEBUGGING
- 19 .comment      0000007b  00000000  00000000  00147ad1  2**0
+ 19 .comment      0000007b  00000000  00000000  00147af0  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00007f48  00000000  00000000  00147b4c  2**2
+ 20 .debug_frame  00007f48  00000000  00000000  00147b6c  2**2
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -421,9 +421,11 @@ void vTaskForI2C( void *pvParameters )
 void vTaskForDisplay( void *pvParameters )
 {
  80004f8:	b480      	push	{r7}
- 80004fa:	b083      	sub	sp, #12
+ 80004fa:	b087      	sub	sp, #28
  80004fc:	af00      	add	r7, sp, #0
  80004fe:	6078      	str	r0, [r7, #4]
+
+	int displayNumbers[4];
 
   for( ;; )
  8000500:	e7fe      	b.n	8000500 <vTaskForDisplay+0x8>

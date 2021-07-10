@@ -133,6 +133,8 @@ void vTaskForI2C( void *pvParameters )
 void vTaskForDisplay( void *pvParameters )
 {
 
+	int displayNumbers[4];
+
   for( ;; )
  {
 
