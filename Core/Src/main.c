@@ -29,6 +29,8 @@
 #include "task.h"
 #include "croutine.h"
 
+#include "ADCman.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -103,9 +105,17 @@ void vTaskForModbus( void *pvParameters )
 void vTaskForSPI( void *pvParameters )
 {
 
+  uint8_t sendData[100];
+  uint8_t receiveData[100];
+  uint16_t dataSize;
+
   for( ;; )
  {
+	  //Передать адрес канала, с которого произойдёт конвертация
+	  	HAL_SPI_TransmitReceive(&hspi1, &sendData, &receiveData, dataSize, 1000);
 
+	  	//Получить значение канала при следующей отправке.
+	  	HAL_SPI_TransmitReceive(&hspi1, &sendData, &receiveData, dataSize, 1000);
  }
   vTaskDelete( NULL );
 }
@@ -147,26 +157,28 @@ void vTaskForPorts( void *pvParameters )
 }
 
 /* Работа с драйвером дисплея */
-void vTaskForADCSensorIn4( void *pvParameters )
+void vTaskForADCSensorIn14( void *pvParameters )
 {
 
-  int displayNumbers[4];
+  uint32_t ADCcurrent14 = 0x00;
+  uint8_t Number = 14;
 
   for( ;; )
  {
-
+	  ADCgetvalue(&hadc1, &Number, &ADCcurrent14);
  }
   vTaskDelete( NULL );
 }
 
-void vTaskForADCSensorIn5( void *pvParameters )
+void vTaskForADCSensorIn15( void *pvParameters )
 {
 
-  int displayNumbers[4];
+	uint32_t ADCcurrent15 = 0x00;
+	uint8_t Number = 15;
 
   for( ;; )
  {
-
+	  ADCgetvalue(&hadc1, &Number, &ADCcurrent15);
  }
   vTaskDelete( NULL );
 }
@@ -285,10 +297,10 @@ int main(void)
    xTaskCreate(vTaskForSPI,  (signed char *) "vTaskForSPI", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
 
    /* Создать задачу 2 */
-   xTaskCreate(vTaskForADCSensorIn4,  (signed char *) "vTaskForADCSensorIn4", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+   xTaskCreate(vTaskForADCSensorIn14,  (signed char *) "vTaskForADCSensorIn14", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
 
    /* Создать задачу 2 */
-   xTaskCreate(vTaskForADCSensorIn5,  (signed char *) "vTaskForADCSensorIn5", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
+   xTaskCreate(vTaskForADCSensorIn15,  (signed char *) "vTaskForADCSensorIn15", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
 
    /* Создать задачу 2 */
    xTaskCreate(vTaskForUART,  (signed char *) "vTaskForUART", configMINIMAL_STACK_SIZE, NULL, 1, NULL );
